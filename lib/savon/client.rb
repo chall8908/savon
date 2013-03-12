@@ -37,10 +37,6 @@ module Savon
     def call(operation_name, locals = {}, &block)
       operation(operation_name).call(locals, &block)
     end
-    
-    def async_call(operation_name, locals = {}, &block)
-      operation(operation_name).async_call(locals, &block)
-    end
 
     private
 
