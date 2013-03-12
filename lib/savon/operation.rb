@@ -51,21 +51,6 @@ module Savon
 
       Response.new(response, @globals, @locals)
     end
-    
-    def async_call(locals = {}, callback, errback, &block)
-      @locals = LocalOptions.new(locals)
-
-      BlockInterface.new(@locals).evaluate(block) if block
-
-      builder = Builder.new(@name, @wsdl, @globals, @locals)
-
-      response = Savon.notify_observers(@name, builder, @globals, @locals)
-      response ||= async_call! build_request(builder), callback, errback
-
-      raise_expected_httpi_response! unless response.kind_of?(HTTPI::Response)
-
-      Response.new(response, @globals, @locals)    
-    end
 
     private
 
@@ -75,13 +60,6 @@ module Savon
       log_response(response) if log?
 
       response
-    end
-
-    def async_call!(request, callback, errback)
-      log_request(request) if log?
-      response = HTTPI.post(request)
-      response.callback &callback
-      response.errback &errback
     end
     
     def build_request(builder)
