@@ -6,7 +6,7 @@ describe Savon::SOAPFault do
   let(:another_soap_fault) { Savon::SOAPFault.new new_response(:body => Fixture.response(:another_soap_fault)), nori }
   let(:no_fault) { Savon::SOAPFault.new new_response, nori }
 
-  let(:nori) { Nori.new(:strip_namespaces => true, :convert_tags_to => lambda { |tag| tag.snakecase.to_sym }) }
+  let(:nori) { Nori.new(:strip_namespaces => true, :convert_tags_to => lambda { |tag| tag.snakecase }) }
 
   it "inherits from Savon::Error" do
     expect(Savon::SOAPFault.ancestors).to include(Savon::Error)

@@ -102,10 +102,10 @@ module Savon
 
     def message_tag
       message_tag = @locals[:message_tag]
-      message_tag ||= @wsdl.soap_input(@operation_name.to_sym) if @wsdl.document?
+      message_tag ||= @wsdl.soap_input(@operation_name) if @wsdl.document?
       message_tag ||= Gyoku.xml_tag(@operation_name, :key_converter => @globals[:convert_request_keys_to])
 
-      @message_tag = message_tag.to_sym
+      @message_tag = message_tag
     end
 
     def message_attributes
@@ -127,7 +127,7 @@ module Savon
       namespace_identifier = operation[:namespace_identifier] if operation
       namespace_identifier ||= "wsdl"
 
-      @namespace_identifier = namespace_identifier.to_sym
+      @namespace_identifier = namespace_identifier
     end
 
     def namespace_by_uri(uri)

@@ -19,7 +19,7 @@ describe "Stockquote example" do
 
     cdata = response.body[:get_quote_response][:get_quote_result]
 
-    nori_options = { :convert_tags_to => lambda { |tag| tag.snakecase.to_sym } }
+    nori_options = { :convert_tags_to => lambda { |tag| tag.snakecase } }
     result = Nori.new(nori_options).parse(cdata)
 
     result[:stock_quotes][:stock][:symbol].should == "AAPL"

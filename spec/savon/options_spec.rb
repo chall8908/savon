@@ -657,7 +657,7 @@ describe "Options" do
 
   context "request :response_parser" do
     it "instructs Nori to change the response parser" do
-      nori = Nori.new(:strip_namespaces => true, :convert_tags_to => lambda { |tag| tag.snakecase.to_sym })
+      nori = Nori.new(:strip_namespaces => true, :convert_tags_to => lambda { |tag| tag.snakecase })
       Nori.expects(:new).with { |options| options[:parser] == :nokogiri }.returns(nori)
 
       client = new_client(:endpoint => @server.url(:repeat))
